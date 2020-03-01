@@ -125,4 +125,9 @@ C:\Users\Luka Devic\Desktop\adadad\Git hub\.NET-Core-Web-API\SimpleWebAPI\Simple
 C:\Users\Luka Devic\Desktop\adadad\Git hub\.NET-Core-Web-API\SimpleWebAPI\SimpleWebAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Luka Devic\Desktop\adadad\Git hub\.NET-Core-Web-API\SimpleWebAPI\SimpleWebAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Luka Devic\Desktop\adadad\Git hub\.NET-Core-Web-API\SimpleWebAPI\SimpleWebAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Luka Devic\Desktop\adadad\Git hub\.NET-Core-Web-API\SimpleWebAPI\SimpleWebAPI\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\Luka Devic\Desktop\adadad\Git hub\.NET-Core-Web-API\SimpleWebAPI\SimpleWebAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Luka Devic\Desktop\adadad\Git hub\.NET-Core-Web-API\SimpleWebAPI\SimpleWebAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Luka Devic\Desktop\adadad\Git hub\.NET-Core-Web-API\SimpleWebAPI\SimpleWebAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Luka Devic\Desktop\adadad\Git hub\.NET-Core-Web-API\SimpleWebAPI\SimpleWebAPI\obj\Debug\netcoreapp3.1\SimpleWebAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Luka Devic\Desktop\adadad\Git hub\.NET-Core-Web-API\SimpleWebAPI\SimpleWebAPI\obj\Debug\netcoreapp3.1\SimpleWebAPI.MvcApplicationPartsAssemblyInfo.cache

@@ -1,9 +1,8 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SimpleWebAPI.Dtos;
-using SimpleWebAPI.Entities;
 using SimpleWebAPI.Services;
+using System;
 using System.Collections.Generic;
 
 namespace SimpleWebAPI.Controllers
@@ -12,20 +11,14 @@ namespace SimpleWebAPI.Controllers
     [Route("api/leagueTables")]
     public class LeagueTableController : ControllerBase
     {
-        private readonly IMatchDetailsRepository _matchDetailsRepository;
         private readonly ILeagueTableRepository _leagueTableRepository;
-        private readonly ILegueTableFactory _legueTableFactory;
         private readonly IMapper _mapper;
 
         public LeagueTableController(
-            IMatchDetailsRepository matchDetailsRepository,
             ILeagueTableRepository leagueTableRepository,
-            ILegueTableFactory legueTableFactory,
             IMapper mapper)
         {
-            _matchDetailsRepository = matchDetailsRepository;
             _leagueTableRepository = leagueTableRepository;
-            _legueTableFactory = legueTableFactory;
             _mapper = mapper;
         }
 

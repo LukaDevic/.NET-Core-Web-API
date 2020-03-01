@@ -10,7 +10,6 @@ namespace SimpleWebAPI.Entities
         [Required]
         [MaxLength(50)]
         public string LeagueTitle { get; set; }
-        [Required]
         public int Matchday { get; set; }
         [Required]
         [MaxLength(1)]

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using SimpleWebAPI.DbContexts;
 using SimpleWebAPI.Services;
 
@@ -28,12 +29,17 @@ namespace SimpleWebAPI
                 .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SimpleWebAPI", Version = "v1" });
+            });
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IMatchDetailsRepository, MatchDetailsRepository>();
             services.AddScoped<ILeagueTableRepository, LeagueTableRepository>();
-
             services.AddScoped<ILegueTableFactory, LegueTableFactory>();
+            services.AddScoped<ILeagueService, LeagueService>();
 
             services.AddDbContext<MatchDetailsContext>(options =>
             {
@@ -47,7 +53,13 @@ namespace SimpleWebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SimpleWebAPI");
+                });
             }
+
 
             app.UseRouting();
 

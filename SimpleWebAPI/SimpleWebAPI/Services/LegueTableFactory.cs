@@ -11,7 +11,7 @@ namespace SimpleWebAPI.Services
         public LeagueTable CreateLeagueTable(IEnumerable<MatchDetailsDto> matchDetails)
         {
             var leagueTable = new LeagueTable();
-            var firstMatchDetails = matchDetails.FirstOrDefault();
+            var firstMatchDetails = matchDetails.OrderByDescending(x => x.Matchday).FirstOrDefault();
             if (firstMatchDetails == null)
             {
                 return leagueTable;
@@ -41,10 +41,11 @@ namespace SimpleWebAPI.Services
                 AddAwayTeamStatistic(homeTeam, awayTeam, results, teamStatisticsList);
             }
 
-            var orderedteamStatisticsList = teamStatisticsList.OrderByDescending(x=>x.Points)
-                                                              .ThenByDescending(x=>x.Goals)
-                                                              .ThenByDescending(x=>x.GoalDifference)
-                                                              .ToList();
+            var orderedteamStatisticsList = 
+                teamStatisticsList.OrderByDescending(x=>x.Points)
+                                  .ThenByDescending(x=>x.Goals)
+                                  .ThenByDescending(x=>x.GoalDifference)
+                                  .ToList();
 
             for (var i = 0; i < orderedteamStatisticsList.Count(); i++)
             {
