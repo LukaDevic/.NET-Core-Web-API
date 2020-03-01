@@ -7,7 +7,7 @@ namespace SimpleWebAPI.Services
     public interface ILeagueService
     {
         void UpdateLeagueDetails(IEnumerable<MatchDetailsDto> matchDetailsDtos);
-        void UpdateLeagueTable(string leagueName, LeagueTable leagueFromDb);
+        void UpdateLeagueTable(LeagueTable leagueFromDb);
         void UpdateMatchDetails(IEnumerable<MatchDetails> matchDetails);
     }
 }
