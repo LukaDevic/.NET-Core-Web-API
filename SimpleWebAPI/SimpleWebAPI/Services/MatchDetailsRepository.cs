@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SimpleWebAPI.DbContexts;
+using SimpleWebAPI.ResourceParameters;
 
 namespace SimpleWebAPI.Services
 {
@@ -20,6 +21,46 @@ namespace SimpleWebAPI.Services
             return _context.MatchDetails.ToList();
         }
 
+        public IEnumerable<MatchDetails> GetMatches(
+            MatchDetailsResourceParameters matchDetailsResourceParameters)
+        {
+            if (matchDetailsResourceParameters == null)
+            {
+                throw new ArgumentNullException(nameof(matchDetailsResourceParameters));
+            }
+
+            if (string.IsNullOrEmpty(matchDetailsResourceParameters.Group)
+                && string.IsNullOrEmpty(matchDetailsResourceParameters.HomeTeam))
+            {
+                return GetMatches();
+            }
+
+            var collection = _context.MatchDetails as IQueryable<MatchDetails>;
+            if (!string.IsNullOrEmpty(matchDetailsResourceParameters.Group))
+            {
+                var group = matchDetailsResourceParameters.Group.Trim();
+                collection = collection.Where(x => x.Group == group);
+            }
+
+            if (!string.IsNullOrEmpty(matchDetailsResourceParameters.HomeTeam))
+            {
+                var homeTeam = matchDetailsResourceParameters.HomeTeam.Trim();
+                collection = collection.Where(x => x.HomeTeam == homeTeam);
+            }
+
+            return collection.ToList();
+        }
+
+        public MatchDetails GetMatch(Guid matchId)
+        {
+            return _context.MatchDetails.FirstOrDefault(x => x.Id == matchId);
+        }
+
+        public IEnumerable<MatchDetails> GetMatchesByLeagueName(string key)
+        {
+            return _context.MatchDetails.Where(x=> x.LeagueTitle == key).ToList();
+        }
+
         public void AddMatchDetails(MatchDetails matchDetails)
         {
             if (matchDetails == null)
@@ -30,6 +71,26 @@ namespace SimpleWebAPI.Services
             matchDetails.Id = Guid.NewGuid();
 
             _context.MatchDetails.Add(matchDetails);
+        }
+
+        public void UpdateMatch(MatchDetails match)
+        {
+            if (match == null)
+            {
+                throw new ArgumentNullException(nameof(match));
+            }
+
+            var matchFromDb = _context.MatchDetails
+                                                .FirstOrDefault(x=>x.Id == match.Id);
+
+            matchFromDb.LeagueTitle = match.LeagueTitle;
+            matchFromDb.Matchday = match.Matchday;
+            matchFromDb.Group = match.Group;
+            matchFromDb.HomeTeam = match.HomeTeam;
+            matchFromDb.AwayTeam = match.AwayTeam;
+            matchFromDb.KickoffAt = match.KickoffAt;
+            matchFromDb.Score = match.Score;
+            _context.SaveChanges();
         }
 
         public bool Save()

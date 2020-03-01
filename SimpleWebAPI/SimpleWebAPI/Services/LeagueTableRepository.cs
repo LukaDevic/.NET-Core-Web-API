@@ -34,6 +34,20 @@ namespace SimpleWebAPI.Services
             return collection.ToList();
         }
 
+        public LeagueTable GetLeagueTable(string leagueTitle)
+        {
+            if (leagueTitle == null)
+            {
+                throw new ArgumentNullException(nameof(leagueTitle));
+            }
+
+            var leagueTable = _context.LeagueTables
+                                      .Include(x => x.Standings)
+                                      .SingleOrDefault(x => x.LeagueTitle == leagueTitle);
+
+            return leagueTable;
+        }
+
         public LeagueTable GetLeagueTable(Guid tableId)
         {
             if (tableId == Guid.Empty)
@@ -61,6 +75,20 @@ namespace SimpleWebAPI.Services
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);
+        }
+
+        public void DeleteLeagueTable(Guid tableId)
+        {
+            if (tableId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(tableId));
+            }
+
+            var leagueTable = _context.LeagueTables
+                                      .Include(x => x.Standings)
+                                      .FirstOrDefault(x=>x.Id == tableId);
+            _context.LeagueTables.Remove(leagueTable);
+            _context.SaveChanges();
         }
 
         public void DeleteLeagueTables()

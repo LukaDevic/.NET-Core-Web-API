@@ -8,9 +8,11 @@ namespace SimpleWebAPI.Services
     {
         IEnumerable<LeagueTable> GetLeagueTables();
         IEnumerable<LeagueTable> GetLeagueTables(string searchQuery);
+        LeagueTable GetLeagueTable(string leagueTitle);
         LeagueTable GetLeagueTable(Guid tableId);
         void AddLeagueTable(LeagueTable leagueTable);
         bool Save();
+        void DeleteLeagueTable(Guid tableId);
         void DeleteLeagueTables();
     }
 }

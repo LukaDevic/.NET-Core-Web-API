@@ -7,6 +7,7 @@ namespace SimpleWebAPI.Profiles
         public MatchDetailsProfile()
         {
             CreateMap<Dtos.MatchDetailsDto, Entities.MatchDetails>();
+            CreateMap<Entities.MatchDetails, Dtos.MatchDetailsDto>();
             CreateMap<Entities.LeagueTable, Dtos.LeagueTableDto>();
             CreateMap<Entities.TeamStatistics, Dtos.TeamStatisticsDto>();
         }
