@@ -25,6 +25,7 @@ namespace SimpleWebAPI
         {
             services.AddControllers(
                     setupAction => { setupAction.ReturnHttpNotAcceptable = true; })
+                .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

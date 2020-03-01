@@ -1,4 +1,6 @@
-﻿namespace SimpleWebAPI.Dtos
+﻿using System;
+
+namespace SimpleWebAPI.Dtos
 {
     public class MatchDetailsDto
     {

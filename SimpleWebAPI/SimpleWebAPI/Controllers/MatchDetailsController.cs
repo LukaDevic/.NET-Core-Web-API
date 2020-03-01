@@ -94,7 +94,9 @@ namespace SimpleWebAPI.Controllers
                     _matchDetailsRepository.Save();
                     if (leagueFromDb == null)
                     {
-                        leagueTable = _legueTableFactory.CreateLeagueTable(_mapper.Map<IList<MatchDetailsDto>>(match));
+                        var listforLegueCreation = new List<MatchDetails>();
+                        listforLegueCreation.Add(match);
+                        leagueTable = _legueTableFactory.CreateLeagueTable(_mapper.Map<IList<MatchDetailsDto>>(listforLegueCreation));
                         _leagueTableRepository.AddLeagueTable(leagueTable);
                         _leagueTableRepository.Save();
                     }
