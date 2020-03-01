@@ -21,7 +21,7 @@ namespace SimpleWebAPI.Entities
         [MaxLength(50)]
         public string AwayTeam { get; set; }
         [Required]
-        public string KickoffAt { get; set; }
+        public DateTime KickoffAt { get; set; }
         [MaxLength(10)]
         public string Score { get; set; }
     }

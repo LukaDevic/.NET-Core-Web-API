@@ -40,9 +40,6 @@ namespace SimpleWebAPI.Controllers
         [HttpPost]
         public IActionResult AddResults(IEnumerable<MatchDetailsDto> matchDetailsDtos)
         {
-            //For testing
-            //_matchDetailsRepository.DeleteMatchDetailsEntries();
-            //_leagueTableRepository.DeleteLeagueTables();
             if (!ModelState.IsValid)
             {
                 return BadRequest();
@@ -61,7 +58,7 @@ namespace SimpleWebAPI.Controllers
                 return BadRequest();
             }
             _leagueService.UpdateMatchDetails(matchDetails);
-            return NoContent();
+            return Ok();
         }
     }
 }

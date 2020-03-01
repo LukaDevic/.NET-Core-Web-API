@@ -29,12 +29,6 @@ namespace SimpleWebAPI.Services
                 throw new ArgumentNullException(nameof(matchDetailsResourceParameters));
             }
 
-            if (string.IsNullOrEmpty(matchDetailsResourceParameters.Group)
-                && string.IsNullOrEmpty(matchDetailsResourceParameters.HomeTeam))
-            {
-                return GetMatches();
-            }
-
             var collection = _context.MatchDetails as IQueryable<MatchDetails>;
             if (!string.IsNullOrEmpty(matchDetailsResourceParameters.Group))
             {
@@ -42,10 +36,14 @@ namespace SimpleWebAPI.Services
                 collection = collection.Where(x => x.Group == group);
             }
 
-            if (!string.IsNullOrEmpty(matchDetailsResourceParameters.HomeTeam))
+            if (matchDetailsResourceParameters.StartDate != null)
             {
-                var homeTeam = matchDetailsResourceParameters.HomeTeam.Trim();
-                collection = collection.Where(x => x.HomeTeam == homeTeam);
+                collection = collection.Where(x => x.KickoffAt >= matchDetailsResourceParameters.StartDate);
+            }
+
+            if (matchDetailsResourceParameters.EndDate != null)
+            {
+                collection = collection.Where(x => x.KickoffAt <= matchDetailsResourceParameters.EndDate);
             }
 
             return collection.ToList();
@@ -103,7 +101,5 @@ namespace SimpleWebAPI.Services
             _context.MatchDetails.RemoveRange(_context.MatchDetails);
             _context.SaveChanges();
         }
-
-
     }
 }
